@@ -2,7 +2,7 @@ module V1
   class UsersController < ApplicationController
 
     def index
-      respond_with User.all
+      respond_with User.ordered
     end
 
     def create
