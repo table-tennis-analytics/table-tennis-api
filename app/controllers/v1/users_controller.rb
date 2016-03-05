@@ -10,7 +10,7 @@ module V1
     end
 
     def create
-      respond_with User.create(user_params)
+      respond_with User.create(user_params), location: nil
     end
 
     private
