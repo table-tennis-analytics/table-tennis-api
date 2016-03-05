@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
@@ -49,3 +49,4 @@ gem 'rails-api'
 gem 'responders', '~> 2.0'
 gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.8.0'
+gem 'rails_12factor', group: :production
