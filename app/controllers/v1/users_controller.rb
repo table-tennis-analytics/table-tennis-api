@@ -5,11 +5,19 @@ module V1
       respond_with User.ordered
     end
 
+    def show
+      respond_with user
+    end
+
     def create
       respond_with User.create(user_params)
     end
 
     private
+
+    def user
+      @user ||= User.find params[:id]
+    end
 
     def user_params
       params.require(:user).permit!
