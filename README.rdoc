@@ -1,28 +1,94 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API docs
 
-Things you may want to cover:
+GET /v1/users
+  * Users list ordered by wins / losses coefficient
+  * Response:
+  {
+    "data":
+      [
+        {"id": 2,
+        "name": "Simonas",
+        "total_games": 1,
+        "total_points_scored": 10,
+        "total_points_lost": 20,
+        "total_wins": 1,
+        "total_losses": 0,
+        "coefficient": 1.0},
+        {"id": 1,
+        "name": "Vilius",
+        "total_games": 1,
+        "total_points_scored": 20,
+        "total_points_lost": 10,
+        "total_wins": 0,
+        "total_losses": 1,
+        "coefficient": 0.0}
+      ]
+  }
 
-* Ruby version
+POST /v1/users
+  * User create
+  * Params:
+  {
+    user: {
+      name: 'Vilius'
+    }
+  }
+  * Response:
+  {
+    "data":
+      {"id": 1,
+      "name": "Vilius",
+      "total_games": 1,
+      "total_points_scored": 20,
+      "total_points_lost": 10,
+      "total_wins": 0,
+      "total_losses": 1,
+      "coefficient": 0.0}
+  }
 
-* System dependencies
+GET /v1/games
+  * Games list
+  * Response:
+  {
+    "data":
+      [
+        {"id": 1,
+        "challenger_score": 20,
+        "challenged_score": 10,
+        "challenger": {"id": 1, "name": "Vilius", "coefficient": 0.0},
+        "challenged": {"id": 2, "name": "Simonas", "coefficient": 1.0},
+        "winner": {"id": 2, "name": "Simonas", "coefficient": 1.0}}
+      ]
+  }
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+POST /v1/games
+  * Game create
+  * Params:
+  {
+    game: {
+      challenger_id: 1,
+      challenged_id: 2
+    }
+  }
+  * Response:
+  {
+    "data":
+      {"id": 1,
+      "challenger_score": 20,
+      "challenged_score": 10,
+      "challenger": {"id": 1, "name": "Vilius", "coefficient": 0.0},
+      "challenged": {"id": 2, "name": "Simonas", "coefficient": 1.0},
+      "winner": {"id": 2, "name": "Simonas", "coefficient": 1.0}}
+  }
+PATCH /v1/games/:id
+  * Game update
+  * Params:
+  {
+    game: {
+      challenger_score: 10,
+      challenged_score: 20,
+      winner_id: 1
+    }
+  }

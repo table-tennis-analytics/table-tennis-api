@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   scope :ordered, -> { order coefficient: :desc }
 
   def recalculate_coeffiecient!
-    update coefficient: total_wins / total_losses
+    update coefficient: total_wins / [1, total_losses].max
   end
 
   def lost_games
