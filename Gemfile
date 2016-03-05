@@ -50,3 +50,4 @@ gem 'responders', '~> 2.0'
 gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'rails_12factor', group: :production
+gem 'puma'
