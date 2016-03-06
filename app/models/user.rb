@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :won_games, class_name: 'Game', foreign_key: :winner_id
 
   scope :ordered, -> { order coefficient: :desc }
+  scope :search, -> query { where 'name ILIKE ?', "%#{ query }%" if query.present? }
 
   validates :name, presence: true, uniqueness: true
 

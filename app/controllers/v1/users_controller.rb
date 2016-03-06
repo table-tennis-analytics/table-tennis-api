@@ -2,7 +2,7 @@ module V1
   class UsersController < ApplicationController
 
     def index
-      respond_with User.ordered
+      respond_with User.ordered.search(params[:query])
     end
 
     def show
