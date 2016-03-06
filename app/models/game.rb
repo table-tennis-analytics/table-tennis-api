@@ -3,12 +3,15 @@ class Game < ActiveRecord::Base
   belongs_to :challenged, class_name: 'User'
   belongs_to :winner, class_name: 'User'
 
+  scope :claimed, -> { where.not challenger_id: nil, challenged_id: nil }
+
   after_update :recalculate_coefficients!, if: :winner_id_changed?
 
   private
 
   def recalculate_coefficients!
-    [challenger, challenged].each(&:recalculate_coefficient!)
+    challenger.recalculate_coefficient! challenged
+    challenged.recalculate_coefficient! challenger
   end
 
 end
