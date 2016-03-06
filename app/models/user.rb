@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
 
     opponent_averages = all_games.claimed.to_a.sum do |game|
       _opponent = if game.challenger.id == id
-        challenged
+        game.challenged
       else
-        challenger
+        game.challenger
       end
 
       _opponent.rated_coefficient
