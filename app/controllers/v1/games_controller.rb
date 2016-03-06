@@ -2,9 +2,7 @@ module V1
   class GamesController < ApplicationController
 
     def index
-      scope = params[:unclaimed].present? ? :unclaimed : :all
-
-      respond_with Game.send(scope)
+      respond_with Game.send(params[:scope])
     end
 
     def create
