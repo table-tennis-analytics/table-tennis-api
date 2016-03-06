@@ -4,6 +4,7 @@ class Game < ActiveRecord::Base
   belongs_to :winner, class_name: 'User'
 
   scope :claimed, -> { where.not challenger_id: nil, challenged_id: nil }
+  scope :unclaimed, -> { where challenger_id: nil, challenged_id: nil }
 
   after_update :recalculate_coefficients!, if: :winner_id_changed?
 
