@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   scope :ordered, -> { order coefficient: :desc }
 
+  validates :name, presence: true, uniqueness: true
+
   def recalculate_coeffiecient! opponent
     return if total_games < GAME_THRESHOLD
 
