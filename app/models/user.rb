@@ -25,19 +25,7 @@ class User < ActiveRecord::Base
     return if total_games < GAME_THRESHOLD
 
     _coefficient = if total_games == GAME_THRESHOLD
-      wins = total_wins
-
-      opponent_averages = all_games.claimed.sum do |game|
-        _opponent = if game.challenger.id == id
-          challenged
-        else
-          challenger
-        end
-
-        _opponent.rated_coefficient
-      end / GAME_THRESHOLD
-
-      (wins / (wins + total_losses)) * opponent_averages + MAGIK * opponent_averages
+      calculate_initial_rating
     else
       return unless opponent.rated?
 
@@ -45,6 +33,22 @@ class User < ActiveRecord::Base
     end
 
     update coefficient: _coefficient
+  end
+
+  def calculate_initial_rating
+    wins = total_wins
+
+    opponent_averages = all_games.claimed.sum do |game|
+      _opponent = if game.challenger.id == id
+        challenged
+      else
+        challenger
+      end
+
+      _opponent.rated_coefficient
+    end / GAME_THRESHOLD
+
+    (wins / (wins + total_losses)) * opponent_averages + MAGIK * opponent_averages
   end
 
   def position
