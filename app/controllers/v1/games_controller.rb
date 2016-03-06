@@ -6,7 +6,7 @@ module V1
     end
 
     def create
-      respond_with Game.create(game_params)
+      respond_with Game.create(game_params), location: nil
     end
 
     def update
