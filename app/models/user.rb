@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def calculate_initial_rating
     wins = total_wins
 
-    opponent_averages = all_games.claimed.sum do |game|
+    opponent_averages = all_games.claimed.to_a.sum do |game|
       _opponent = if game.challenger.id == id
         challenged
       else
