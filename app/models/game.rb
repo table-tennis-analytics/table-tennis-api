@@ -9,6 +9,11 @@ class Game < ActiveRecord::Base
 
   after_update :recalculate_coefficients!, if: :winner_id_changed?
 
+  def challenger_id= _id
+    super
+    self.winner_id = _id
+  end
+
   private
 
   def recalculate_coefficients!

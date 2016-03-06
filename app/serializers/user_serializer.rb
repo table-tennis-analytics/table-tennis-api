@@ -5,4 +5,8 @@ class UserSerializer < ActiveModel::Serializer
     object.rated?
   end
 
+  def coefficient
+    object.coefficient.round
+  end
+
 end
