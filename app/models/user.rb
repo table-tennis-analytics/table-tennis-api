@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  def recalculate_coeffiecient! opponent
+  def recalculate_coefficient! opponent
     return if total_games < GAME_THRESHOLD
 
     _coefficient = if total_games == GAME_THRESHOLD
