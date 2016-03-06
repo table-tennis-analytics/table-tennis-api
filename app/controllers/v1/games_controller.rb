@@ -2,7 +2,7 @@ module V1
   class GamesController < ApplicationController
 
     def index
-      respond_with Game.send(params[:scope])
+      respond_with Game.ordered.send(params[:scope])
     end
 
     def create

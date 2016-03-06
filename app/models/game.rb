@@ -5,6 +5,7 @@ class Game < ActiveRecord::Base
 
   scope :claimed, -> { where.not challenger_id: nil, challenged_id: nil }
   scope :unclaimed, -> { where challenger_id: nil, challenged_id: nil }
+  scope :ordered, -> { order updated_at: :desc }
 
   after_update :recalculate_coefficients!, if: :winner_id_changed?
 
